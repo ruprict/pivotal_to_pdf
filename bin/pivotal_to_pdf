@@ -24,6 +24,11 @@ class PivotalToPdfApp < Thor
     PivotalToPdf::Main.label label_text
   end
 
+  desc "all", "print all stories"
+  def all
+    PivotalToPdf::Main.all
+  end
+
 end
 
 PivotalToPdfApp.start

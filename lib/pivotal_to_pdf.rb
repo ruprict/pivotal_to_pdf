@@ -1,17 +1,17 @@
 require 'rubygems'
-require "pivotal_to_pdf/version"
+require_relative "pivotal_to_pdf/version"
 require 'rainbow'
 require 'thor'
 require 'active_resource'
 require "pivotal_to_pdf-formatters"
-require 'pivotal_to_pdf/configure'
-require 'pivotal_to_pdf/formatter_factory'
-require 'pivotal_to_pdf/text_formatters/simple_markup'
-require 'pivotal_to_pdf/pivotal'
-require 'pivotal_to_pdf/iteration'
-require 'pivotal_to_pdf/text'
-require 'pivotal_to_pdf/story'
-require 'pivotal_to_pdf/pt-workarounds'
+require_relative 'pivotal_to_pdf/configure'
+require_relative 'pivotal_to_pdf/formatter_factory'
+require_relative 'pivotal_to_pdf/text_formatters/simple_markup'
+require_relative 'pivotal_to_pdf/pivotal'
+require_relative 'pivotal_to_pdf/iteration'
+require_relative 'pivotal_to_pdf/text'
+require_relative 'pivotal_to_pdf/story'
+require_relative 'pivotal_to_pdf/pt-workarounds'
 
 module PivotalToPdf
   class Main < Thor
@@ -35,6 +35,12 @@ module PivotalToPdf
         stories = Story.find(:all, :params => {:filter => "label:\"" + label_text + "\""})
         FormatterFactory.formatter.new(stories).write_to(label_text)
       end
+
+      def all
+        stories = Story.all
+        FormatterFactory.formatter.new(stories).write_to("all")
+      end
+
     end
   end
 end
